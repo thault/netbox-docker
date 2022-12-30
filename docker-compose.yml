@@ -35,6 +35,7 @@ services:
   postgres:
     image: postgres:14-alpine
     env_file: env/postgres.env
+    user: 'unit:root'
     volumes:
     - /mnt/vols/netbox/postgres:/var/lib/postgresql/data:z
 
