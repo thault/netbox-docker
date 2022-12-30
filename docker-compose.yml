@@ -14,6 +14,13 @@ services:
     - /mnt/vols/netbox/reports:/etc/netbox/reports:z,ro
     - /mnt/vols/netbox/scripts:/etc/netbox/scripts:z,ro
     - /mnt/vols/netbox/media:/opt/netbox/netbox/media:z
+    labels:
+    - traefik.enable=true
+    - traefik.docker.network=traefik-public
+    - traefik.http.routers.netbox.rule=Host(`netbox.home.thault.com`)
+    - traefik.http.routers.netbox.tls=true
+    - traefik.http.services.netbox.loadbalancer.server.scheme=http
+    - traefik.http.services.netbox.loadbalancer.server.port=8080
   netbox-worker:
     <<: *netbox
     depends_on:
